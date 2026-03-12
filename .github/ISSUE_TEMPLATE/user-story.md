@@ -4,7 +4,6 @@ about: User Story Template
 title: User Story
 labels: ''
 assignees: luisplis
-
 ---
 
 **As a** [role]
