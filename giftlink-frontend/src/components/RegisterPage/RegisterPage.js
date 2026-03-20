@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 
 import './RegisterPage.css';
+import urlConfig from '../../config/urlConfig';
+import useAppContext from '../../context/AppContext';
+import { useNavigate } from 'react-router-dom';
 
 function RegisterPage() {
     const [firstName, setFirstName] = useState('');
@@ -9,8 +12,30 @@ function RegisterPage() {
     const [password, setPassword] = useState('');
 
     const handleRegister = async () => {
-        console.log("Register invoked")
+        try{
+            //Step 1: Implement API call
+            const response = await fetch(`${urlConfig.backendUrl}/api/auth/register`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    firstName,
+                    lastName,
+                    email,
+                    password,
+                }),
+            });
+            
+            //Step 2: Access data, login, set the AuthContext and set user details
+        } catch (error) {
+            console.error('Registration failed:', error);
+        }
     }
+
+    const { isLoggedIn, setIsLoggedIn, userName, setUserName } = useAppContext();
+
+    const navigate=useNavigate();
 
 return (
     <div className="container mt-5">
